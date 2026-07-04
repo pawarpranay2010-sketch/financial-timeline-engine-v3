@@ -840,6 +840,17 @@ Generate a professional investment memo."""
                         file_name="Financial_Timeline_Investment_Memo.docx",
                         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     )
+                    pdf_file = generate_pdf_download(
+                    "Financial Timeline Report",
+                    ai_narrative_result
+                    )
+
+                    st.download_button(
+                       label="📄 Download PDF Report",
+                       data=pdf_file,
+                       file_name="Financial_Timeline_Report.pdf",
+                       mime="application/pdf",
+                       )
                 else:
                     # BUG FIX: this branch previously showed a misleading
                     # "please upload documents" message even when files
