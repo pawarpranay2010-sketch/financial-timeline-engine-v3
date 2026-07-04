@@ -6,10 +6,9 @@ import json
 import pandas as pd
 from docx import Document
 from pypdf import PdfReader
-from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import Spacer
 
 # Set Page Config for mobile
 st.set_page_config(page_title="Financial Timeline Engine", layout="centered")
