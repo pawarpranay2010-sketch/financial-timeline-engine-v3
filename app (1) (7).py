@@ -269,9 +269,8 @@ def call_ai_with_fallback(prompt_text, system_prompt=None, temperature=None):
         st.session_state["ai_connected"] = True
         st.session_state["ai_provider_used"] = "Google AI Studio"
         return result
-    except Exception as e:
-        print(f"[DEBUG] Google AI Studio failed: {type(e).__name__}: {e}")
-        st.warning(f"🔧 DEBUG — Google AI Studio failed: {type(e).__name__}: {e}")
+    except Exception:
+        pass
 
     # 2) SECONDARY: Groq
     try:
@@ -279,9 +278,8 @@ def call_ai_with_fallback(prompt_text, system_prompt=None, temperature=None):
         st.session_state["ai_connected"] = True
         st.session_state["ai_provider_used"] = "Groq"
         return result
-    except Exception as e:
-        print(f"[DEBUG] Groq failed: {type(e).__name__}: {e}")
-        st.warning(f"🔧 DEBUG — Groq failed: {type(e).__name__}: {e}")
+    except Exception:
+        pass
 
     # 3) FINAL FALLBACK: OpenRouter (already has its own internal 2-model retry)
     result = call_openrouter_engine(prompt_text, system_prompt=system_prompt, temperature=temperature)
