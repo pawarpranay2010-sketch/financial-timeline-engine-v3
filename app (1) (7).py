@@ -639,7 +639,27 @@ def generate_docx_download(text_content, timeline_data=None):
     doc.save(bio)
     bio.seek(0)
     return bio
+def generate_pdf_download(title, memo_text):
+    """Generate a PDF report and return its bytes."""
+    buffer = io.BytesIO()
 
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    styles = getSampleStyleSheet()
+
+    story = []
+
+    story.append(Paragraph(xml_escape(title), styles["Title"]))
+    story.append(Spacer(1, 12))
+
+    for paragraph in memo_text.split("\n"):
+        if paragraph.strip():
+            story.append(Paragraph(xml_escape(paragraph), styles["BodyText"]))
+            story.append(Spacer(1, 6))
+
+    doc.build(story)
+    buffer.seek(0)
+
+    return buffer.getvalue()
 
 # ---------------------------------------------------------------------------
 # Timeline visualization engine
