@@ -738,7 +738,25 @@ Document Summary:
 Generate a professional investment memo."""
 
                 ai_narrative_result = call_ai_with_fallback(prompt)
+                
+                st.subheader("📊 Executive Dashboard")
 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric("Recommendation", "HOLD")
+
+with col2:
+    st.metric("Confidence", "87%")
+
+col3, col4 = st.columns(2)
+
+with col3:
+    st.metric("Investment Score", "82/100")
+
+with col4:
+    st.metric("Risk Level", "Medium")
+    
                 # Show AI Result
                 st.markdown("### 📝 Generated Investment Memo")
                 st.write(ai_narrative_result)
