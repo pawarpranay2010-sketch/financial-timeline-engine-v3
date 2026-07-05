@@ -771,7 +771,19 @@ def main():
         else:
             with st.spinner("Processing document data and generating timeline..."):
                 master_summary = merge_document_summaries(document_summaries)
-                prompt = f"""Analyze the following corporate document data text carefully. Extract key event milestones, timelines, and potential controversy flags. Write a comprehensive multi-paragraph investment memo that identifies:
+                memo_system_prompt = (
+    "You are an elite institutional investment research analyst. "
+    "Write the investment memo strictly and exclusively from the "
+    "facts, figures, dates, and events contained in the Document "
+    "Summary provided below. Do not produce generic, templated, or "
+    "boilerplate analysis. Every statement must be supported by the "
+    "Document Summary. If information is missing, explicitly state that "
+    "the source documents do not provide it."
+)
+
+prompt = f"""Analyze the Document Summary below carefully and write a professional investment memo.
+
+Requirements:
 1. Key financial events and dates
 2. Market movements and impacts
 3. Risk factors and opportunities
@@ -780,9 +792,13 @@ def main():
 Document Summary:
 {master_summary}
 
-Generate a professional investment memo."""
+Generate an institutional-quality investment memo using ONLY the information contained in the Document Summary."""
 
-                ai_narrative_result = call_ai_with_fallback(prompt)
+ai_narrative_result = call_ai_with_fallback(
+    prompt,
+    system_prompt=memo_system_prompt,
+    temperature=0.3
+)
                 
                 st.subheader("📊 Executive Dashboard")
 
@@ -792,8 +808,7 @@ Generate a professional investment memo."""
                     st.metric("Recommendation", "HOLD")
 
                 with col2:
-                    st.metric("Confidence", "87%")
-
+                    st.metric("Confidence", "87%
                 col3, col4 = st.columns(2)
 
                 with col3:
