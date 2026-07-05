@@ -662,6 +662,9 @@ def generate_pdf_download(title, memo_text):
     story.append(Paragraph(xml_escape(title), styles["Heading1"]))
     story.append(Spacer(1, 20))
 
+    story.append(Paragraph("<b>Executive Summary</b>", styles["Heading2"]))
+    story.append(Spacer(1, 10))
+
     for paragraph in memo_text.split("\n"):
         if paragraph.strip():
             story.append(Paragraph(xml_escape(paragraph), styles["BodyText"]))
