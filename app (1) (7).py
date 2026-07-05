@@ -653,8 +653,14 @@ def generate_pdf_download(title, memo_text):
 
     story = []
 
-    story.append(Paragraph(xml_escape(title), styles["Title"]))
-    story.append(Spacer(1, 12))
+    story.append(Paragraph("<b>📈 Financial Timeline Report</b>", styles["Title"]))
+    story.append(Spacer(1, 20))
+
+    story.append(Paragraph("AI-Powered Investment Analysis", styles["Heading2"]))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph(xml_escape(title), styles["Heading1"]))
+    story.append(Spacer(1, 20))
 
     for paragraph in memo_text.split("\n"):
         if paragraph.strip():
