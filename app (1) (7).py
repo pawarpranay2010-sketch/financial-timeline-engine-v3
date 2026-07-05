@@ -9,6 +9,8 @@ from pypdf import PdfReader
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Spacer
+from xml.sax.saxutils import escape as xml_escape
 
 # Set Page Config for mobile
 st.set_page_config(page_title="Financial Timeline Engine", layout="centered")
