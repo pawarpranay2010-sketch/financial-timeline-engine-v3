@@ -11,6 +11,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Spacer
 from xml.sax.saxutils import escape as xml_escape
+from datetime import datetime
 
 # Set Page Config for mobile
 st.set_page_config(page_title="Financial Timeline Engine", layout="centered")
@@ -664,6 +665,18 @@ def generate_pdf_download(title, memo_text):
 
     story.append(Paragraph("<b>Executive Summary</b>", styles["Heading2"]))
     story.append(Spacer(1, 10))
+
+    story.append(
+    Paragraph(
+        f"""
+        <b>Report Generated:</b> {datetime.now().strftime("%d %B %Y, %H:%M")}
+        <b>Engine:</b> Financial Timeline Engine v3<br/>
+        <b>Analysis:</b> AI-Powered Corporate Intelligence
+        """,
+        styles["Normal"],
+    )
+    )
+    story.append(Spacer(1, 15))
 
     for paragraph in memo_text.split("\n"):
         if paragraph.strip():
